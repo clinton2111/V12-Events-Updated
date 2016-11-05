@@ -1,0 +1,20 @@
+{
+  "name": "V12eventsnew",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Clinton D'souza <clinton_dsouza92@yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.97.8"
+  }
+}
