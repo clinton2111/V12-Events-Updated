@@ -1,6 +1,7 @@
 (function() {
   $(document).ready(function() {
-    return $(".dropdown-button").dropdown();
+    $(".dropdown-button").dropdown();
+    return $(".button-collapse").sideNav();
   });
 
 }).call(this);

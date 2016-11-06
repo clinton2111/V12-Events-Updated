@@ -5,7 +5,11 @@
 @endsection
 
 @section('content')
-
+    <style>
+        header, main, footer {
+            padding-left: 0px;
+        }
+    </style>
     <div class="container">
         <div class="row">
             <div class="">

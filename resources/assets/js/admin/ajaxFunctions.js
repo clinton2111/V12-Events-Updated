@@ -1,4 +1,4 @@
-/*!  - v - 2016-11-06 */(function() {
+(function() {
   $('#ajaxUpdatePassword').on('click', function() {
     var _token, new_password, password_confirmation;
     event.preventDefault();
@@ -26,14 +26,6 @@
         }
       });
     }
-  });
-
-}).call(this);
-
-(function() {
-  $(document).ready(function() {
-    $(".dropdown-button").dropdown();
-    return $(".button-collapse").sideNav();
   });
 
 }).call(this);

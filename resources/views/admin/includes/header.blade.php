@@ -3,6 +3,10 @@
         <div class="nav-wrapper teal">
 
             <div class="container">
+                @if(!Auth::guest())
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i
+                                class="material-icons">menu</i></a>
+                @endif
                 <ul id="dropdown1" class="dropdown-content">
                     <li><a href="#!">Profile</a></li>
                     <li class="divider"></li>
@@ -39,4 +43,25 @@
 
         </div>
     </nav>
+
+    @if(!Auth::guest())
+        <ul id="slide-out" class="side-nav fixed">
+            <li>
+                <div class="userView">
+                    <div class="background">
+                        <img src="/images/gifs/background.gif">
+                    </div>
+                    <a href="#!user"><img class="circle" src="/uploads/avatars/{{Auth::user()->avatar}}"></a>
+                    <a href="#!name"><span class="white-text name">{{Auth::User()->name}}</span></a>
+                    <a href="#!email"><span class="white-text email">{{Auth::User()->email}}</span></a>
+                </div>
+            </li>
+            <li><a href="{{ route('dashboard.account') }}" class="waves-effect">
+                    <i class="material-icons">perm_identity</i>
+                    Account Settings
+                </a>
+            </li>
+        </ul>
+
+    @endif
 </header>

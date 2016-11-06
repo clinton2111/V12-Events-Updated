@@ -1,7 +1,9 @@
 @extends('admin.layouts.app')
 @section('title')
-    Dashboard
+    Dashboard - Home
 @endsection
 @section('content')
-    {{ucwords('logged in')}}
+    <div class="container">
+        <h3> Dashboard Home</h3>
+    </div>
 @endsection

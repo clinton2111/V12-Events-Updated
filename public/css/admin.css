@@ -1,0 +1,11 @@
+/* line 1, ../../resources/assets/sass/admin_components/_sidebar.scss */
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+  /* line 6, ../../resources/assets/sass/admin_components/_sidebar.scss */
+  header, main, footer {
+    padding-left: 0;
+  }
+}

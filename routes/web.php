@@ -22,14 +22,22 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
-//    Route::post('/profile', [
-//        'uses' => 'UserController@update_avatar',
-//        'as' => 'user.profile'
-//
-//    ]);
+Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
+    $adminControllerPrefix = "Admin\\";
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
+    Route::get('/profile', [
+        'uses' => $adminControllerPrefix . 'UserController@index',
+        'as' => 'dashboard.account'
+    ]);
+    Route::post('/profile', [
+        'uses' => $adminControllerPrefix . 'UserController@update_avatar',
+        'as' => 'user.update_avatar'
+    ]);
+    Route::post('/update-password', [
+        'uses' => $adminControllerPrefix . 'UserController@update_password',
+        'as' => 'user.update_password'
+    ]);
 
 });
