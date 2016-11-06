@@ -14,3 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::get('/admin', function () {
+//    return redirect()->guest('login');
+//});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
+//    Route::post('/profile', [
+//        'uses' => 'UserController@update_avatar',
+//        'as' => 'user.profile'
+//
+//    ]);
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+
+});
