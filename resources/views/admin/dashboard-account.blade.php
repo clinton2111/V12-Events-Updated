@@ -6,7 +6,7 @@
     <div class="container">
         <h4> Account Settings</h4>
 
-        <section>
+        <div>
             <h5>Change Password</h5>
             <form action="" method="post">
 
@@ -24,21 +24,33 @@
                         <label for="password_confirmation">Retype Password</label>
                     </div>
                 </div>
-                <div class="row">
+                <div class="">
                     <button class="btn btn-primary" id="ajaxUpdatePassword">
                         Update
                     </button>
                 </div>
             </form>
-        </section>
+        </div>
 
+        <br>
+        <hr>
+        <br>
+        <div>
+            <h5>Change Avatar</h5>
+            <form action="{{ route('user.update_avatar') }}" enctype="multipart/form-data" method="post">
 
-        {{--<form action="{{ route('user.update_avatar') }}" enctype="multipart/form-data" method="post">--}}
-        {{--<label for="">Update Profile Image</label>--}}
-        {{--<input type="file" name="avatar">--}}
-        {{--{{csrf_field()}}--}}
-        {{--<input type="submit" class="pull-right btn btn-sm btn-primary">--}}
-        {{--</form>--}}
+                <div class="">
+                    {{--<label for="avatar">Update Profile Image</label>--}}
+                    <input type="file" name="avatar">
+                </div>
+                <br>
+                {{csrf_field()}}
+                <div class="">
+                    <input type="submit" class="btn btn-sm btn-primary">
+                </div>
+
+            </form>
+        </div>
     </div>
 
     <script>
