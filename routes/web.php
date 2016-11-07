@@ -24,20 +24,38 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     $adminControllerPrefix = "Admin\\";
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
-    Route::get('/profile', [
-        'uses' => $adminControllerPrefix . 'UserController@index',
-        'as' => 'dashboard.account'
+
+
+//    View Routes
+    Route::get('/dashboard', [
+        'uses' => $adminControllerPrefix . 'ViewController@fetchDashboardPage',
+        'as' => 'dashboard.home'
     ]);
-    Route::post('/profile', [
-        'uses' => $adminControllerPrefix . 'UserController@update_avatar',
+
+    Route::get('/account', [
+        'uses' => $adminControllerPrefix . 'ViewController@fetchAccountSettingsPage',
+        'as' => 'dashboard.accountSettingsView'
+    ]);
+
+    Route::get('/contact', [
+        'uses' => $adminControllerPrefix . 'ViewController@fetchContactSettingsPage',
+        'as' => 'dashboard.contactSettingsView'
+    ]);
+
+
+    Route::post('/update-avatar', [
+        'uses' => $adminControllerPrefix . 'UserController@updateAvatar',
         'as' => 'user.update_avatar'
     ]);
+
     Route::post('/update-password', [
-        'uses' => $adminControllerPrefix . 'UserController@update_password',
+        'uses' => $adminControllerPrefix . 'UserController@updatePassword',
         'as' => 'user.update_password'
+    ]);
+
+    Route::post('/update-address', [
+        'uses' => $adminControllerPrefix . 'ConfigController@updateAddress',
+        'as' => 'config.update_address'
     ]);
 
 });

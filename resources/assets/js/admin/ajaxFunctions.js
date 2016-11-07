@@ -28,4 +28,14 @@
     }
   });
 
+  $('#ajaxUpdateAddress').on('click', function() {
+    var building, city, country, street;
+    event.preventDefault();
+    building = document.getElementById("building").value;
+    street = document.getElementById("street").value;
+    city = document.getElementById("city").value;
+    country = document.getElementById("country").value;
+    return console.log(URL);
+  });
+
 }).call(this);

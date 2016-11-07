@@ -11,12 +11,7 @@ use Intervention\Image\Facades\Image;
 class UserController extends Controller
 {
     //
-    public function index()
-    {
-        return view('admin.dashboard-account');
-    }
-
-    public function update_avatar(Request $request)
+    public function updateAvatar(Request $request)
     {
         if ($request->hasFile('avatar')) {
 
@@ -39,7 +34,7 @@ class UserController extends Controller
         }
     }
 
-    public function update_password(Request $request)
+    public function updatePassword(Request $request)
     {
         $password = $request['new_password'];
         $user = Auth::user();

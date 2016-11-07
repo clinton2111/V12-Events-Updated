@@ -17,7 +17,17 @@ $ '#ajaxUpdatePassword'
     .done (data)->
       if data['status'] == 200
         toastr.success(data['message'])
-        document.getElementById("new_password").value=''
-        document.getElementById("password_confirmation").value=''
+        document.getElementById("new_password").value = ''
+        document.getElementById("password_confirmation").value = ''
       else
         toastr.error(data['message'])
+
+$ '#ajaxUpdateAddress'
+.on 'click', ->
+  event.preventDefault();
+  building = document.getElementById("building").value;
+  street = document.getElementById("street").value;
+  city = document.getElementById("city").value;
+  country = document.getElementById("country").value;
+  console.log URL;
+

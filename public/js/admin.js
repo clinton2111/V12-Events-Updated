@@ -1,4 +1,4 @@
-/*!  - v - 2016-11-06 */(function() {
+/*!  - v - 2016-11-07 */(function() {
   $('#ajaxUpdatePassword').on('click', function() {
     var _token, new_password, password_confirmation;
     event.preventDefault();
@@ -28,12 +28,23 @@
     }
   });
 
+  $('#ajaxUpdateAddress').on('click', function() {
+    var building, city, country, street;
+    event.preventDefault();
+    building = document.getElementById("building").value;
+    street = document.getElementById("street").value;
+    city = document.getElementById("city").value;
+    country = document.getElementById("country").value;
+    return console.log(URL);
+  });
+
 }).call(this);
 
 (function() {
   $(document).ready(function() {
     $(".dropdown-button").dropdown();
-    return $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav();
+    return $('select').material_select();
   });
 
 }).call(this);

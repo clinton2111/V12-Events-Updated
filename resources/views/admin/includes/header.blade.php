@@ -71,7 +71,7 @@
                 </a>
             </li>
             <li>
-                <a href="" class="waves-effect">
+                <a href="{{ route('dashboard.contactSettingsView') }}" class="waves-effect">
                     <i class="material-icons">mail</i>
                     Contact Settings
                 </a>
@@ -83,7 +83,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('dashboard.account') }}" class="waves-effect">
+                <a href="{{ route('dashboard.accountSettingsView') }}" class="waves-effect">
                     <i class="material-icons">perm_identity</i>
                     Account Settings
                 </a>

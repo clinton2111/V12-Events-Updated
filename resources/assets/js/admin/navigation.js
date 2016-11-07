@@ -1,7 +1,8 @@
 (function() {
   $(document).ready(function() {
     $(".dropdown-button").dropdown();
-    return $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav();
+    return $('select').material_select();
   });
 
 }).call(this);
