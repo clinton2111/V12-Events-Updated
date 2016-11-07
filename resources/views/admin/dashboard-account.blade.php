@@ -26,7 +26,7 @@
                 </div>
                 <div class="">
                     <button class="btn btn-primary" id="ajaxUpdatePassword">
-                        Update
+                        Update Password
                     </button>
                 </div>
             </form>
@@ -46,7 +46,7 @@
                 <br>
                 {{csrf_field()}}
                 <div class="">
-                    <input type="submit" class="btn btn-sm btn-primary">
+                    <input type="submit" class="btn btn-sm btn-primary" value="Update Avatar">
                 </div>
 
             </form>
