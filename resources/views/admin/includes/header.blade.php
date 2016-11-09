@@ -41,7 +41,7 @@
                 </div>
             </li>
             <li>
-                <a href="" class="waves-effect">
+                <a href="{{ route('dashboard.home') }}" class="waves-effect">
                     <i class="material-icons">home</i>
                     Home
                 </a>
