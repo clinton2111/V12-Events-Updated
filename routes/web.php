@@ -57,5 +57,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
         'uses' => $adminControllerPrefix . 'ConfigController@updateAddress',
         'as' => 'config.update_address'
     ]);
+    Route::post('/update-address-map', [
+        'uses' => $adminControllerPrefix . 'ConfigController@updateAddressMap',
+        'as' => 'config.update_address_map'
+    ]);
 
 });

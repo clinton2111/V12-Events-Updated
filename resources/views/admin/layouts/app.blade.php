@@ -37,5 +37,11 @@
 <script src="{{URL::to('components/materialize/dist/js/materialize.min.js')}}"></script>
 <script src="{{URL::to('components/toastr/toastr.min.js')}}"></script>
 <script src="{{URL::to('js/admin.js')}}"></script>
+@if(Route::current()->getName() == 'dashboard.contactSettingsView')
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAURlr1w-MD4al8sM3w_OG0xwqXPj_dfFA&callback=initMap">
+    </script>
+@endif
+
 </body>
 </html>

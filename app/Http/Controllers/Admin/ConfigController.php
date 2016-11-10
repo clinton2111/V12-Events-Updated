@@ -11,7 +11,12 @@ class ConfigController extends Controller
     //
     private function checkIfKeyExists($key)
     {
-        return Config::where('key', '=', $key)->exists() ? true : false;
+        $config = Config::where('key', $key)->first();
+        if (is_null($config)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public function updateAddress(Request $request)
@@ -22,5 +27,43 @@ class ConfigController extends Controller
             'city' => 'required',
             'country' => 'required'
         ]);
+        $key = 'company_address';
+        $address = $request['building'] . ' ,<br>' . $request['street'] . ' ,<br>' . $request['city'] . ' ,<br>' . $request['country'];
+
+        if (!$this->checkIfKeyExists($key)) {
+            $config = new Config;
+            $config->key = $key;
+            $config->value = $address;
+            $config->save();
+
+            return response()->json(['message' => 'Address Updated', 'status' => 200], 200);
+        } else {
+
+            Config::where('key', $key)->update(['value' => $address]);
+            return response()->json(['message' => 'Address Updated', 'status' => 200], 200);
+        }
+    }
+
+    public function updateAddressMap(Request $request)
+    {
+        $this->validate($request, [
+            'lat' => 'required',
+            'long' => 'required',
+        ]);
+
+        $key = 'company_geolocation';
+        $latlong = $request['lat'] . ',' . $request['long'];
+        if (!$this->checkIfKeyExists($key)) {
+            $config = new Config;
+            $config->key = $key;
+            $config->value = $latlong;
+            $config->save();
+
+            return response()->json(['message' => 'Location Updated', 'status' => 200], 200);
+        } else {
+
+            Config::where('key', $key)->update(['value' => $latlong]);
+            return response()->json(['message' => 'Location Updated', 'status' => 200], 200);
+        }
     }
 }

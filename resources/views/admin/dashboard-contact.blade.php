@@ -5,33 +5,33 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col m6">
+            <div class="col m6 s12">
                 <h4>Address Details</h4>
                 <form action="{{route('config.update_address')}}" method="post">
                     <input type="hidden" id='_token' value="{{csrf_token()}}">
                     <div class="row">
-                        <div class="input-field col m8">
+                        <div class="input-field col m8 s12">
                             <input type="text" id="building" name="building" class="validate" required>
                             <label for="building">Building Name</label>
                         </div>
 
                     </div>
                     <div class="row">
-                        <div class="input-field col m8">
+                        <div class="input-field col m8 s12">
                             <input type="text" id="street" name="street" class="validate" required>
                             <label for="street">Street Name</label>
                         </div>
 
                     </div>
                     <div class="row">
-                        <div class="input-field col m8">
+                        <div class="input-field col m8 s12">
                             <input type="text" id="city" name="city" class="validate" required>
                             <label for="city">City</label>
                         </div>
 
                     </div>
                     <div class="row">
-                        <div class="input-field col m8">
+                        <div class="input-field col m8 s12">
                             <select id="country" name="country">
                                 <option value="" disabled selected>Country...</option>
                                 <option value="Afganistan">Afghanistan</option>
@@ -292,12 +292,23 @@
                     </div>
                 </form>
             </div>
-            <div class="col m6">
+            <div class="col m6 s12">
                 <h4>Map Location</h4>
+                <div id="map" style="height: 350px;width: 100%;">
+
+                </div>
+                <input type="hidden" id='_token_map' value="{{csrf_token()}}">
+                <br>
+                <button class="btn btn-primary disabled" id="ajaxUpdateMapLocation">
+                    Update Map Location
+                </button>
             </div>
         </div>
     </div>
+
     <script>
         var URL = '{{route('config.update_address')}}';
+        var URL_MAP = '{{route('config.update_address_map')}}';
     </script>
+
 @endsection
