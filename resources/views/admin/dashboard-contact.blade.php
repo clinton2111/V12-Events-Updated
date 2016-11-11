@@ -11,21 +11,25 @@
                     <input type="hidden" id='_token' value="{{csrf_token()}}">
                     <div class="row">
                         <div class="input-field col m8 s12">
-                            <input type="text" id="building" name="building" class="validate" required>
+                            <input type="text" id="building" name="building" class="validate"
+                                   value="{{ (old('building')) ? old('building') : $data['building'] }}"
+                                   required>
                             <label for="building">Building Name</label>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="input-field col m8 s12">
-                            <input type="text" id="street" name="street" class="validate" required>
+                            <input type="text" id="street" name="street" class="validate"
+                                   value="{{ (old('street')) ? old('street') : $data['street'] }}" required>
                             <label for="street">Street Name</label>
                         </div>
 
                     </div>
                     <div class="row">
                         <div class="input-field col m8 s12">
-                            <input type="text" id="city" name="city" class="validate" required>
+                            <input type="text" id="city" name="city" class="validate"
+                                   value="{{ (old('city')) ? old('city') : $data['city'] }}" required>
                             <label for="city">City</label>
                         </div>
 
@@ -33,7 +37,8 @@
                     <div class="row">
                         <div class="input-field col m8 s12">
                             <select id="country" name="country">
-                                <option value="" disabled selected>Country...</option>
+                                <option value="{{ ($data['country']) ? ($data['country']) : '' }}" disabled
+                                        selected>{{ ($data['country']) ? ($data['country']) : 'Select Country' }}</option>
                                 <option value="Afganistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
                                 <option value="Algeria">Algeria</option>
@@ -340,13 +345,14 @@
         var lat, long;
         function initMap() {
             var latlong, map;
-            latlong = {
-                lat: 25.1972,
-                lng: 55.2744
+                    latlong = {
+                lat: {{($data['lat'])?($data['lat']):25.1972}} ,
+                lng: {{($data['lng'])?($data['lng']):55.2744}}
             };
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
-                center: latlong
+                center: latlong,
+                styles: {!!($data['company_map_style']) ? $data['company_map_style'] : [] !!}
             });
             marker = new google.maps.Marker({
                 position: latlong,

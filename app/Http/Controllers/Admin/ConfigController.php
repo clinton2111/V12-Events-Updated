@@ -28,7 +28,7 @@ class ConfigController extends Controller
             'country' => 'required'
         ]);
         $key = 'company_address';
-        $address = $request['building'] . ' ,<br>' . $request['street'] . ' ,<br>' . $request['city'] . ' ,<br>' . $request['country'];
+        $address = trim($request['building']) . ',<br>' . trim($request['street']) . ',<br>' . trim($request['city']) . ',<br>' . trim($request['country']);
 
         if (!$this->checkIfKeyExists($key)) {
             $config = new Config;
