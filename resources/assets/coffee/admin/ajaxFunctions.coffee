@@ -78,6 +78,10 @@ $ '#ajaxUpdateMapStyle'
   .done (data)->
     if data['status'] == 200
       toastr.success(data['message'])
+      map.setOptions({
+        styles: JSON.parse(style)
+      })
+      console.log(map)
       $('#mapStyleModal').modal('close');
     else
       toastr.error(data['message'])

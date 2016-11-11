@@ -95,6 +95,10 @@
     }).done(function(data) {
       if (data['status'] === 200) {
         toastr.success(data['message']);
+        map.setOptions({
+          styles: JSON.parse(style)
+        });
+        console.log(map);
         return $('#mapStyleModal').modal('close');
       } else {
         return toastr.error(data['message']);

@@ -342,9 +342,9 @@
         var URL_MAP = '{{route('config.update_address_map')}}';
         var URL_MAP_STYLE = '{{route('config.update_address_map_style')}}';
 
-        var lat, long;
+        var lat, long,map;
         function initMap() {
-            var latlong, map;
+            var latlong;
                     latlong = {
                 lat: {{($data['lat'])?($data['lat']):25.1972}} ,
                 lng: {{($data['lng'])?($data['lng']):55.2744}}
