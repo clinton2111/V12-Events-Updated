@@ -2,7 +2,8 @@
   $(document).ready(function() {
     $(".dropdown-button").dropdown();
     $(".button-collapse").sideNav();
-    return $('select').material_select();
+    $('select').material_select();
+    return $('.modal').modal();
   });
 
 }).call(this);

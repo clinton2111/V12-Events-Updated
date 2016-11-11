@@ -66,4 +66,26 @@ class ConfigController extends Controller
             return response()->json(['message' => 'Location Updated', 'status' => 200], 200);
         }
     }
+
+    public function updateAddressMapStyle(Request $request)
+    {
+        $this->validate($request, [
+            'style' => 'required'
+        ]);
+
+        $key = 'company_map_style';
+        $style = $request['style'];
+        if (!$this->checkIfKeyExists($key)) {
+            $config = new Config;
+            $config->key = $key;
+            $config->value = $style;
+            $config->save();
+
+            return response()->json(['message' => 'Style Updated', 'status' => 200], 200);
+        } else {
+
+            Config::where('key', $key)->update(['value' => $style]);
+            return response()->json(['message' => 'Style Updated', 'status' => 200], 200);
+        }
+    }
 }

@@ -46,32 +46,10 @@ $ '#ajaxUpdateAddress'
     else
       toastr.error(data['message'])
 
-
-window.initMap = ->
-  latlong = {lat: 25.1972, lng: 55.2744};
-  map = new (google.maps.Map)(document.getElementById('map'),
-    zoom: 15,
-    center: latlong
-  )
-
-  marker = new google.maps.Marker
-    position: latlong,
-    draggable: true
-
-  google.maps.event.addListener marker, 'dragend', ->
-    $('#ajaxUpdateMapLocation').removeClass('disabled')
-
-  marker.setMap(map)
-
-
 $ '#ajaxUpdateMapLocation'
 .on 'click', ->
   event.preventDefault();
-  lat = marker.getPosition().lat();
-  long = marker.getPosition().lng()
   _token = document.getElementById("_token_map").value;
-  console.log lat
-  console.log long
   $.ajax
     method: 'Post'
     url: URL_MAP
@@ -82,5 +60,24 @@ $ '#ajaxUpdateMapLocation'
   .done (data)->
     if data['status'] == 200
       toastr.success(data['message'])
+    else
+      toastr.error(data['message'])
+
+
+$ '#ajaxUpdateMapStyle'
+.on 'click', ->
+  event.preventDefault();
+  style = document.getElementById("mapStyles").value
+  _token = document.getElementById("mapStylesToken").value;
+  $.ajax
+    method: 'Post'
+    url: URL_MAP_STYLE
+    data:
+      _token: _token
+      style: style.toString()
+  .done (data)->
+    if data['status'] == 200
+      toastr.success(data['message'])
+      $('#mapStyleModal').modal('close');
     else
       toastr.error(data['message'])

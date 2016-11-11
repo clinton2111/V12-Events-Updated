@@ -299,9 +299,35 @@
                 </div>
                 <input type="hidden" id='_token_map' value="{{csrf_token()}}">
                 <br>
-                <button class="btn btn-primary disabled" id="ajaxUpdateMapLocation">
-                    Update Map Location
-                </button>
+                <div class="row">
+                    <button class="btn btn-primary disabled" id="ajaxUpdateMapLocation">
+                        Update Map Location
+                    </button>
+                    <button class="btn btn-primary" id="" data-target="mapStyleModal">
+                        Change Map Style
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mapStyleModal" class="modal">
+
+            <div class="modal-content">
+                <h5>Paste styles from Snazzy Maps below.</h5>
+                <div class="row">
+                    <div class="input-field col s12">
+                        {{--<textarea id="mapStyles" class="materialize-textarea"></textarea>--}}
+                        <input type="text" class="input-field" id="mapStyles">
+                        <label for="mapStyles">Styles</label>
+
+                    </div>
+                    <input type="hidden" id="mapStylesToken" value="{{csrf_token()}}">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn-flat" id="ajaxUpdateMapStyle">
+                    Update Map Style
+                </a>
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
             </div>
         </div>
     </div>
@@ -309,6 +335,30 @@
     <script>
         var URL = '{{route('config.update_address')}}';
         var URL_MAP = '{{route('config.update_address_map')}}';
+        var URL_MAP_STYLE = '{{route('config.update_address_map_style')}}';
+
+        var lat, long;
+        function initMap() {
+            var latlong, map;
+            latlong = {
+                lat: 25.1972,
+                lng: 55.2744
+            };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: latlong
+            });
+            marker = new google.maps.Marker({
+                position: latlong,
+                draggable: true
+            });
+            google.maps.event.addListener(marker, 'dragend', function () {
+                $('#ajaxUpdateMapLocation').removeClass('disabled');
+                lat = marker.getPosition().lat();
+                long = marker.getPosition().lng()
+            });
+            marker.setMap(map);
+        }
     </script>
 
 @endsection

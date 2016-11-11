@@ -1,4 +1,4 @@
-/*!  - v - 2016-11-10 */(function() {
+/*!  - v - 2016-11-11 */(function() {
   var marker;
 
   marker = null;
@@ -59,34 +59,10 @@
     });
   });
 
-  window.initMap = function() {
-    var latlong, map;
-    latlong = {
-      lat: 25.1972,
-      lng: 55.2744
-    };
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: latlong
-    });
-    marker = new google.maps.Marker({
-      position: latlong,
-      draggable: true
-    });
-    google.maps.event.addListener(marker, 'dragend', function() {
-      return $('#ajaxUpdateMapLocation').removeClass('disabled');
-    });
-    return marker.setMap(map);
-  };
-
   $('#ajaxUpdateMapLocation').on('click', function() {
-    var _token, lat, long;
+    var _token;
     event.preventDefault();
-    lat = marker.getPosition().lat();
-    long = marker.getPosition().lng();
     _token = document.getElementById("_token_map").value;
-    console.log(lat);
-    console.log(long);
     return $.ajax({
       method: 'Post',
       url: URL_MAP,
@@ -104,13 +80,36 @@
     });
   });
 
+  $('#ajaxUpdateMapStyle').on('click', function() {
+    var _token, style;
+    event.preventDefault();
+    style = document.getElementById("mapStyles").value;
+    _token = document.getElementById("mapStylesToken").value;
+    return $.ajax({
+      method: 'Post',
+      url: URL_MAP_STYLE,
+      data: {
+        _token: _token,
+        style: style.toString()
+      }
+    }).done(function(data) {
+      if (data['status'] === 200) {
+        toastr.success(data['message']);
+        return $('#mapStyleModal').modal('close');
+      } else {
+        return toastr.error(data['message']);
+      }
+    });
+  });
+
 }).call(this);
 
 (function() {
   $(document).ready(function() {
     $(".dropdown-button").dropdown();
     $(".button-collapse").sideNav();
-    return $('select').material_select();
+    $('select').material_select();
+    return $('.modal').modal();
   });
 
 }).call(this);
