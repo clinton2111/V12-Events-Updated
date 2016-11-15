@@ -37,8 +37,8 @@
                     <div class="row">
                         <div class="input-field col m8 s12">
                             <select id="country" name="country">
-                                <option value="{{ ($data['country']) ? ($data['country']) : '' }}" disabled
-                                        selected>{{ ($data['country']) ? ($data['country']) : 'Select Country' }}</option>
+                                <option value="{{ ($data['country']!=null) ? ($data['country']) : '' }}" disabled
+                                        selected>{{ ($data['country']!=null) ? ($data['country']) : 'Select Country' }}</option>
                                 <option value="Afganistan">Afghanistan</option>
                                 <option value="Albania">Albania</option>
                                 <option value="Algeria">Algeria</option>
@@ -346,13 +346,13 @@
         function initMap() {
             var latlong;
                     latlong = {
-                lat: {{($data['lat'])?($data['lat']):25.1972}} ,
-                lng: {{($data['lng'])?($data['lng']):55.2744}}
+                lat: {{($data['lat']!=null)?($data['lat']):25.1972}} ,
+                lng: {{($data['lng']!=null)?($data['lng']):55.2744}}
             };
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 15,
                 center: latlong,
-                styles: {!!($data['company_map_style']) ? $data['company_map_style'] : [] !!}
+                styles: {!!($data['company_map_style']!=null) ? $data['company_map_style'] : json_encode([]) !!}
             });
             marker = new google.maps.Marker({
                 position: latlong,

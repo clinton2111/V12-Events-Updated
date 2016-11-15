@@ -29,14 +29,14 @@ class ViewController extends Controller
             if ($result) {
                 $data[$match] = $result['value'];
             } else {
-                $data[$match] = '';
+                $data[$match] = null;
             }
         }
 
 
         $addressSections = ['building', 'street', 'city', 'country'];
         $addressArray = null;
-        if ($data['company_address'] != '') {
+        if ($data['company_address'] != null) {
             $addressArray = explode(',', $data['company_address']);
         } else {
             $addressArray = ['', '', '', ''];
@@ -48,7 +48,7 @@ class ViewController extends Controller
             $index++;
         }
         unset($data['company_address']);
-        if ($data['company_geolocation'] != '') {
+        if ($data['company_geolocation'] != null) {
             $geoArray = explode(',', $data['company_geolocation']);
             $data['lat'] = floatval($geoArray[0]);
             $data['lng'] = floatval($geoArray[1]);

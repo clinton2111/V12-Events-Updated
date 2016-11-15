@@ -18,16 +18,15 @@ class UserController extends Controller
             $path = '/uploads/avatars/';
             $avatar = $request->file('avatar');
 
-
-            $current_image = Auth::user()->avatar;
+            $user = Auth::user();
+            $current_image = $user->avatar;
             if ($current_image != 'default.jpg') {
                 File::delete(public_path($path . $current_image));
             }
-
-            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            $filename = time() . md5($user->email) . '.' . $avatar->getClientOriginalExtension();
             Image::make($avatar)->resize(300, 300)->save(public_path($path . $filename));
 
-            $user = Auth::user();
+
             $user->avatar = $filename;
             $user->save();
             return view('admin.dashboard-account', array('user' => Auth::user()));
