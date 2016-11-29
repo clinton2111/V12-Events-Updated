@@ -14,7 +14,7 @@
         <div class="row">
             <div class="">
                 <h3>Login</h3>
-                <form method="POST" action="{{ url('/login') }}">
+                <form method="POST" action="{{route('login.user')}}">
                     {{csrf_field()}}
                     <div class="row">
                         <div class="input-field col m6 offset-m3 s12">

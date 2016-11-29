@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class UserController extends Controller
             $path = '/uploads/avatars/';
             $avatar = $request->file('avatar');
 
-            $user = Auth::user();
+            $user = Sentinel::getUser();
             $current_image = $user->avatar;
             if ($current_image != 'default.jpg') {
                 File::delete(public_path($path . $current_image));
@@ -29,16 +30,18 @@ class UserController extends Controller
 
             $user->avatar = $filename;
             $user->save();
-            return view('admin.dashboard-account', array('user' => Auth::user()));
+            return view('admin.dashboard-account', array('user' => Sentinel::getUser()));
         }
     }
 
     public function updatePassword(Request $request)
     {
         $password = $request['new_password'];
-        $user = Auth::user();
-        $user->password = $password;
-        if ($user->update()) {
+        $user = Sentinel::getUser();
+        $credentials = [
+            'password' => $password
+        ];
+        if (Sentinel::update($user, $credentials)) {
             return response()->json(['message' => 'Password Updated', 'status' => 200], 200);
         } else {
             return response()->json(['message' => 'Password Updating Failed', 'status' => 422], 422);

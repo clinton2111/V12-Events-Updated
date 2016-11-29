@@ -3,22 +3,22 @@
         <div class="nav-wrapper teal">
 
             <div class="container">
-                @if(!Auth::guest())
+                @if(Sentinel::check())
                     <a href="#" data-activates="slide-out" class="button-collapse"><i
                                 class="material-icons">menu</i></a>
                 @endif
 
                 <ul id="nav-mobile" class="right ">
-                    @if (Auth::guest())
+                    @if (!Sentinel::check())
                         <li>Welcome Stranger</li>
                     @else
                         <li>
                             <a
-                               style="position: relative;padding-left: 50px">
+                                    style="position: relative;padding-left: 50px">
                                 <img srcset=""
-                                     src="/uploads/avatars/{{Auth::user()->avatar}}"
+                                     src="/uploads/avatars/{{Sentinel::getUser()->avatar}}"
                                      alt=""
-                                     style="width: 36px; height: 36px ; position: absolute;top:13px;left:10px;border-radius: 50%;margin-right: 25px">{{Auth::user()->name}}
+                                     style="width: 36px; height: 36px ; position: absolute;top:13px;left:10px;border-radius: 50%;margin-right: 25px">{{Sentinel::getUser()->name}}
                             </a>
                         </li>
                     @endif
@@ -28,16 +28,16 @@
         </div>
     </nav>
 
-    @if(!Auth::guest())
+    @if(Sentinel::check())
         <ul id="slide-out" class="side-nav fixed">
             <li>
                 <div class="userView">
                     <div class="background">
                         <img src="/images/gifs/background.gif">
                     </div>
-                    <img class="circle" src="/uploads/avatars/{{Auth::user()->avatar}}">
-                    <span class="white-text name">{{Auth::User()->name}}</span>
-                    <span class="white-text email">{{Auth::User()->email}}</span>
+                    <img class="circle" src="/uploads/avatars/{{Sentinel::getUser()->avatar}}">
+                    <span class="white-text name">{{Sentinel::getUser()->name}}</span>
+                    <span class="white-text email">{{Sentinel::getUser()->email}}</span>
                 </div>
             </li>
             <li>
@@ -89,18 +89,20 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/logout') }}"
-                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+
+                <form id="logout-form" action="{{route('logout.user')}}" method="POST" name="logout-form"
+                      style="display: none">
+                    {{ csrf_field() }}
+
+                </form>
+                <a href="#"
+                   onclick="document.getElementById('logout-form').submit();">
                     <i class="material-icons">exit_to_app</i>
                     Logout
                 </a>
             </li>
 
-            <form id="logout-form" action="{{ url('/logout') }}" method="POST"
-                  style="display: none;">
-                {{ csrf_field() }}
-            </form>
+
         </ul>
 
     @endif
