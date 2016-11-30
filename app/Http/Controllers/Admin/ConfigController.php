@@ -30,13 +30,14 @@ class ConfigController extends Controller
             'country' => 'required'
         ]);
         $key = 'company_address';
+        $category = config('app.contact_category');
         $address = trim($request['building']) . ',<br>' . trim($request['street']) . ',<br>' . trim($request['city']) . ',<br>' . trim($request['country']);
 
         if (!$this->checkIfKeyExists($key)) {
             $config = new Config;
             $config->key = $key;
             $config->value = $address;
-            $config->category = config('app.contact_category');
+            $config->category = $category;
             $config->save();
 
             return response()->json(['message' => 'Address Updated', 'status' => 200], 200);
@@ -55,12 +56,13 @@ class ConfigController extends Controller
         ]);
 
         $key = 'company_geolocation';
+        $category = config('app.contact_category');
         $latlong = $request['lat'] . ',' . $request['long'];
         if (!$this->checkIfKeyExists($key)) {
             $config = new Config;
             $config->key = $key;
             $config->value = $latlong;
-            $config->category = config('app.contact_category');
+            $config->category = $category;
             $config->save();
 
             return response()->json(['message' => 'Location Updated', 'status' => 200], 200);
@@ -78,12 +80,13 @@ class ConfigController extends Controller
         ]);
 
         $key = 'company_map_style';
+        $category = config('app.contact_category');
         $style = $request['style'];
         if (!$this->checkIfKeyExists($key)) {
             $config = new Config;
             $config->key = $key;
             $config->value = $style;
-            $config->category = config('app.contact_category');
+            $config->category = $category;
             $config->save();
 
             return response()->json(['message' => 'Style Updated', 'status' => 200], 200);
@@ -92,5 +95,31 @@ class ConfigController extends Controller
             Config::where('key', $key)->update(['value' => $style]);
             return response()->json(['message' => 'Style Updated', 'status' => 200], 200);
         }
+    }
+
+    public function updateSocialLinks(Request $request)
+    {
+        $keys = ['facebook', 'twitter', 'gplus', 'instagram', 'youtube', 'linkedin', 'vimeo', 'snapchat'];
+        $category = config('app.social_category');
+
+        $results = Config::where('category', $category)->get();
+        foreach ($keys as $key){
+            $link = $request[$key];
+            if($link){
+                if(!$this->checkIfKeyExists($key)){
+                    $config = new Config;
+                    $config->key = $key;
+                    $config->value = $link;
+                    $config->category = $category;
+                    $config->save();
+                }else{
+                    if($request[$key]!=$results[$key]){
+                        Config::where('key', $key)->update(['value' => $link]);
+                    }
+                }
+            }
+        }
+
+        return response()->json(['message' => 'Social Links Updated', 'status' => 200], 200);
     }
 }

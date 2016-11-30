@@ -98,8 +98,42 @@
         map.setOptions({
           styles: JSON.parse(style)
         });
-        console.log(map);
         return $('#mapStyleModal').modal('close');
+      } else {
+        return toastr.error(data['message']);
+      }
+    });
+  });
+
+  $('#ajaxUpdateSocialLinks').on('click', function() {
+    var _facebook, _gplus, _instagram, _linkedin, _snapchat, _token, _twitter, _vimeo, _youtube;
+    event.preventDefault();
+    _facebook = document.getElementById("facebook_link").value ? document.getElementById("facebook_link").value : null;
+    _twitter = document.getElementById("twitter_link").value ? document.getElementById("twitter_link").value : null;
+    _gplus = document.getElementById("gplus_link").value ? document.getElementById("gplus_link").value : null;
+    _instagram = document.getElementById("instagram_link").value ? document.getElementById("instagram_link").value : null;
+    _youtube = document.getElementById("youtube_link").value ? document.getElementById("youtube_link").value : null;
+    _linkedin = document.getElementById("linkedin_link").value ? document.getElementById("linkedin_link").value : null;
+    _vimeo = document.getElementById("vimeo_link").value ? document.getElementById("vimeo_link").value : null;
+    _snapchat = document.getElementById("snapchat_link").value ? document.getElementById("snapchat_link").value : null;
+    _token = document.getElementById("_token_social").value;
+    return $.ajax({
+      method: 'Post',
+      url: URL_SOCIAL,
+      data: {
+        _token: _token,
+        facebook: _facebook,
+        twitter: _twitter,
+        gplus: _gplus,
+        instagram: _instagram,
+        youtube: _youtube,
+        linkedin: _linkedin,
+        vimeo: _vimeo,
+        snapchat: _snapchat
+      }
+    }).done(function(data) {
+      if (data['status'] === 200) {
+        return toastr.success(data['message']);
       } else {
         return toastr.error(data['message']);
       }

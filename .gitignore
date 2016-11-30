@@ -7,3 +7,4 @@ Homestead.json
 /public/components/
 .sass-cache/
 .idea/*
+/npm-debug.log

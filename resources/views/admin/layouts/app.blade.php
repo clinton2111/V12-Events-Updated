@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{URL::to('components/materialize/dist/css/materialize.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{URL::to('components/components-font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{URL::to('components/toastr/toastr.min.css')}}">
     <link href="{{URL::to('css/admin.css')}}" rel="stylesheet">
 
