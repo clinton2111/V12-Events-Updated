@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 class ConfigController extends Controller
 {
+
+
     //
     private function checkIfKeyExists($key)
     {
@@ -34,6 +36,7 @@ class ConfigController extends Controller
             $config = new Config;
             $config->key = $key;
             $config->value = $address;
+            $config->category = config('app.contact_category');
             $config->save();
 
             return response()->json(['message' => 'Address Updated', 'status' => 200], 200);
@@ -57,6 +60,7 @@ class ConfigController extends Controller
             $config = new Config;
             $config->key = $key;
             $config->value = $latlong;
+            $config->category = config('app.contact_category');
             $config->save();
 
             return response()->json(['message' => 'Location Updated', 'status' => 200], 200);
@@ -79,6 +83,7 @@ class ConfigController extends Controller
             $config = new Config;
             $config->key = $key;
             $config->value = $style;
+            $config->category = config('app.contact_category');
             $config->save();
 
             return response()->json(['message' => 'Style Updated', 'status' => 200], 200);

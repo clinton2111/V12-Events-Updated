@@ -11,4 +11,9 @@ class Config extends Model
     {
         $this->attributes['key'] = strtolower($value);
     }
+
+    public function setCategoryAttribute($value)
+    {
+        $this->attributes['category'] = strtoupper($value);
+    }
 }

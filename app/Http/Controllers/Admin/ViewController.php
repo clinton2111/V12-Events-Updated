@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 class ViewController extends Controller
 {
     //
+
+
     public function fetchRegisterPage()
     {
         return view('auth.register');
@@ -39,17 +41,25 @@ class ViewController extends Controller
     {
         $data = array();
         $matchThese = ['company_address', 'company_geolocation', 'company_map_style'];
+        $results = Config::where('category', config('app.contact_category'))->get();
+        $outer_index = 0;
 
         foreach ($matchThese as $match) {
-            $result = Config::where('key', $match)->first();
-            if ($result) {
-                $data[$match] = $result['value'];
-            } else {
+            $inner_index = 0;
+            foreach ($results as $result) {
+                if ($result->key == $match) {
+                    $data[$match] = $result->value;
+                    unset($results[$inner_index]);
+                    break;
+                }
+                $inner_index++;
+            }
+            if (!isset($data[$match])) {
                 $data[$match] = null;
             }
+            unset($matchThese[$outer_index]);
+            $outer_index++;
         }
-
-
         $addressSections = ['building', 'street', 'city', 'country'];
         $addressArray = null;
         if ($data['company_address'] != null) {
@@ -69,10 +79,11 @@ class ViewController extends Controller
             $data['lat'] = floatval($geoArray[0]);
             $data['lng'] = floatval($geoArray[1]);
             unset($data['company_geolocation']);
-        }else{
+        } else {
             $data['lat'] = null;
             $data['lng'] = null;
         }
         return view('admin.dashboard-contact')->with('data', $data);
+
     }
 }
