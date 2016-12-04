@@ -40,8 +40,10 @@ class ViewController extends Controller
     public function fetchContactSettingsPage()
     {
         $data = array();
-        $matchThese = ['company_address', 'company_geolocation', 'company_map_style'];
-        $results = Config::where('category', config('app.contact_category'))->get();
+        $matchThese = ['company_address', 'company_geolocation', 'company_map_style', 'facebook', 'twitter', 'gplus', 'instagram', 'youtube', 'linkedin', 'vimeo', 'snapchat', 'email', 'phone', 'skype', 'whatsapp'];
+        $results = Config::where('category', config('app.contact_category'))
+            ->orWhere('category', config('app.social_category'))
+            ->get();
         $outer_index = 0;
 
         foreach ($matchThese as $match) {
@@ -83,6 +85,7 @@ class ViewController extends Controller
             $data['lat'] = null;
             $data['lng'] = null;
         }
+//        dd($data);
         return view('admin.dashboard-contact')->with('data', $data);
 
     }

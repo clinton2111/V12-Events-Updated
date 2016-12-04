@@ -1,4 +1,4 @@
-/*!  - v - 2016-11-30 */(function() {
+/*!  - v - 2016-12-04 */(function() {
   var marker;
 
   marker = null;
@@ -119,7 +119,7 @@
     _token = document.getElementById("_token_social").value;
     return $.ajax({
       method: 'Post',
-      url: URL_SOCIAL,
+      url: URL_CONTACT,
       data: {
         _token: _token,
         facebook: _facebook,
@@ -129,7 +129,36 @@
         youtube: _youtube,
         linkedin: _linkedin,
         vimeo: _vimeo,
-        snapchat: _snapchat
+        snapchat: _snapchat,
+        category: 'social'
+      }
+    }).done(function(data) {
+      if (data['status'] === 200) {
+        return toastr.success(data['message']);
+      } else {
+        return toastr.error(data['message']);
+      }
+    });
+  });
+
+  $('#ajaxUpdateContactDetails').on('click', function() {
+    var _email, _phone, _skype, _token, _whatsapp;
+    event.preventDefault();
+    _phone = document.getElementById("phone_contact_detail").value ? document.getElementById("phone_contact_detail").value : null;
+    _email = document.getElementById("email_contact_detail").value ? document.getElementById("email_contact_detail").value : null;
+    _skype = document.getElementById("skype_contact_detail").value ? document.getElementById("skype_contact_detail").value : null;
+    _whatsapp = document.getElementById("whatsapp_contact_detail").value ? document.getElementById("whatsapp_contact_detail").value : null;
+    _token = document.getElementById("_token_contact").value;
+    return $.ajax({
+      method: 'Post',
+      url: URL_CONTACT,
+      data: {
+        _token: _token,
+        phone: _phone,
+        email: _email,
+        skype: _skype,
+        whatsapp: _whatsapp,
+        category: 'contact'
       }
     }).done(function(data) {
       if (data['status'] === 200) {

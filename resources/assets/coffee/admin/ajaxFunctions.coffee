@@ -99,7 +99,7 @@ $ '#ajaxUpdateSocialLinks'
   _token = document.getElementById("_token_social").value;
   $.ajax
     method: 'Post'
-    url: URL_SOCIAL
+    url: URL_CONTACT
     data:
       _token: _token
       facebook:_facebook
@@ -110,6 +110,32 @@ $ '#ajaxUpdateSocialLinks'
       linkedin:_linkedin
       vimeo:_vimeo
       snapchat:_snapchat
+      category:'social'
+  .done (data)->
+    if data['status'] == 200
+      toastr.success(data['message'])
+    else
+      toastr.error(data['message'])
+
+
+$ '#ajaxUpdateContactDetails'
+.on 'click', ->
+  event.preventDefault();
+  _phone = if document.getElementById("phone_contact_detail").value then document.getElementById("phone_contact_detail").value else null
+  _email = if document.getElementById("email_contact_detail").value then document.getElementById("email_contact_detail").value else null
+  _skype = if document.getElementById("skype_contact_detail").value then document.getElementById("skype_contact_detail").value else null
+  _whatsapp = if document.getElementById("whatsapp_contact_detail").value then document.getElementById("whatsapp_contact_detail").value else null
+  _token = document.getElementById("_token_contact").value;
+  $.ajax
+    method: 'Post'
+    url: URL_CONTACT
+    data:
+      _token: _token
+      phone:_phone
+      email:_email
+      skype:_skype
+      whatsapp:_whatsapp
+      category:'contact'
   .done (data)->
     if data['status'] == 200
       toastr.success(data['message'])

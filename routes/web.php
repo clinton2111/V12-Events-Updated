@@ -86,9 +86,13 @@ Route::group(['middleware' => ['web', 'checkLogin'], 'prefix' => 'admin'], funct
         'as' => 'config.update_address_map_style'
     ]);
 
-    Route::post('/update-social-links', [
-        'uses' => $adminControllerPrefix . 'ConfigController@updateSocialLinks',
-        'as' => 'config.update_social_links'
+//    Route::post('/update-social-links', [
+//        'uses' => $adminControllerPrefix . 'ConfigController@updateSocialLinks',
+//        'as' => 'config.update_social_links'
+//    ]);
+    Route::post('/update-contact-details', [
+        'uses' => $adminControllerPrefix . 'ConfigController@updateContactDetails',
+        'as' => 'config.update_contact_details'
     ]);
 
 });

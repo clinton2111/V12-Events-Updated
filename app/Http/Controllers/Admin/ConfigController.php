@@ -21,6 +21,15 @@ class ConfigController extends Controller
         }
     }
 
+    private function arrayKeyModified($array)
+    {
+        $temp_array = array();
+        foreach ($array as $result) {
+            $temp_array[$result->key] = $result;
+        }
+        return $temp_array;
+    }
+
     public function updateAddress(Request $request)
     {
         $this->validate($request, [
@@ -97,29 +106,44 @@ class ConfigController extends Controller
         }
     }
 
-    public function updateSocialLinks(Request $request)
+    public function updateContactDetails(Request $request)
     {
-        $keys = ['facebook', 'twitter', 'gplus', 'instagram', 'youtube', 'linkedin', 'vimeo', 'snapchat'];
-        $category = config('app.social_category');
-
+        $keys = ['facebook', 'twitter', 'gplus', 'instagram', 'youtube', 'linkedin', 'vimeo', 'snapchat', 'email', 'phone', 'skype', 'whatsapp'];
+        $category = null;
+        if ($request->category == 'social') {
+            $category = config('app.social_category');
+        } elseif ($request->category == 'contact') {
+            $category = config('app.contact_category');
+        } else {
+            abort(404);
+        }
         $results = Config::where('category', $category)->get();
-        foreach ($keys as $key){
+        $modified_results = $this->arrayKeyModified($results);
+        foreach ($keys as $key) {
             $link = $request[$key];
-            if($link){
-                if(!$this->checkIfKeyExists($key)){
+            if ($link) {
+                if (!$this->checkIfKeyExists($key)) {
                     $config = new Config;
                     $config->key = $key;
                     $config->value = $link;
                     $config->category = $category;
                     $config->save();
-                }else{
-                    if($request[$key]!=$results[$key]){
+                } else {
+
+                    if ($link != $modified_results[$key]->value) {
                         Config::where('key', $key)->update(['value' => $link]);
                     }
                 }
             }
         }
+        if ($category == 'social') {
+            return response()->json(['message' => 'Social Links Updated', 'status' => 200], 200);
+        } elseif ($category == 'contact') {
+            return response()->json(['message' => 'Contact Details Updated', 'status' => 200], 200);
+        } else {
+            abort(404);
+        }
 
-        return response()->json(['message' => 'Social Links Updated', 'status' => 200], 200);
     }
+
 }
