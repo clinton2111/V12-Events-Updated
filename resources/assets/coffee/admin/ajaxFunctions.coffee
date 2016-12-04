@@ -102,15 +102,15 @@ $ '#ajaxUpdateSocialLinks'
     url: URL_CONTACT
     data:
       _token: _token
-      facebook:_facebook
-      twitter:_twitter
-      gplus:_gplus
-      instagram:_instagram
-      youtube:_youtube
-      linkedin:_linkedin
-      vimeo:_vimeo
-      snapchat:_snapchat
-      category:'social'
+      facebook: _facebook
+      twitter: _twitter
+      gplus: _gplus
+      instagram: _instagram
+      youtube: _youtube
+      linkedin: _linkedin
+      vimeo: _vimeo
+      snapchat: _snapchat
+      category: 'social'
   .done (data)->
     if data['status'] == 200
       toastr.success(data['message'])
@@ -131,13 +131,34 @@ $ '#ajaxUpdateContactDetails'
     url: URL_CONTACT
     data:
       _token: _token
-      phone:_phone
-      email:_email
-      skype:_skype
-      whatsapp:_whatsapp
-      category:'contact'
+      phone: _phone
+      email: _email
+      skype: _skype
+      whatsapp: _whatsapp
+      category: 'contact'
   .done (data)->
     if data['status'] == 200
+      toastr.success(data['message'])
+    else
+      toastr.error(data['message'])
+
+$ '.delete_icon'
+.on 'click', ->
+  event.preventDefault();
+  parent = this.parentElement.parentElement
+  input = parent.getElementsByTagName("INPUT")
+  ID = $(input).prop('id')
+  NAME = $(input).prop('name')
+  _token = document.getElementById("_token_contact").value;
+  $.ajax
+    method: 'Post'
+    url: URL_DELETE
+    data:
+      _token: _token
+      name: NAME
+  .done (data)->
+    if data['status'] == 200
+      document.getElementById(ID).value = null;
       toastr.success(data['message'])
     else
       toastr.error(data['message'])

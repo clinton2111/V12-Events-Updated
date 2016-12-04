@@ -85,7 +85,6 @@ class ViewController extends Controller
             $data['lat'] = null;
             $data['lng'] = null;
         }
-//        dd($data);
         return view('admin.dashboard-contact')->with('data', $data);
 
     }

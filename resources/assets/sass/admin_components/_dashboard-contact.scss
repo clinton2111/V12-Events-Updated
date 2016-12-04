@@ -1,0 +1,19 @@
+.dashboard-contact {
+  form {
+    .input-field {
+      @include position(relative);
+      .delete-link {
+        @include position(absolute);
+        width: 100%;
+        pointer-events: none;
+        .delete_icon {
+          color: black;
+          float: right;
+          @include padding(null 0.75rem);
+          cursor: pointer;
+          pointer-events: all;
+        }
+      }
+    }
+  }
+}

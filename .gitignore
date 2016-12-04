@@ -8,3 +8,4 @@ Homestead.json
 .sass-cache/
 .idea/*
 /npm-debug.log
+/bourbon/

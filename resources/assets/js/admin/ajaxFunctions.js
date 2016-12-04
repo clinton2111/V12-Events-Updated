@@ -169,4 +169,29 @@
     });
   });
 
+  $('.delete_icon').on('click', function() {
+    var ID, NAME, _token, input, parent;
+    event.preventDefault();
+    parent = this.parentElement.parentElement;
+    input = parent.getElementsByTagName("INPUT");
+    ID = $(input).prop('id');
+    NAME = $(input).prop('name');
+    _token = document.getElementById("_token_contact").value;
+    return $.ajax({
+      method: 'Post',
+      url: URL_DELETE,
+      data: {
+        _token: _token,
+        name: NAME
+      }
+    }).done(function(data) {
+      if (data['status'] === 200) {
+        document.getElementById(ID).value = null;
+        return toastr.success(data['message']);
+      } else {
+        return toastr.error(data['message']);
+      }
+    });
+  });
+
 }).call(this);

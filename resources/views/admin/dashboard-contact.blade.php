@@ -3,7 +3,7 @@
     Dashboard - Contact Settings
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container dashboard-contact">
         <div class="row">
             <div class="col m6 s12">
                 <h4>Address Details</h4>
@@ -315,102 +315,126 @@
             </div>
         </div>
         <div class="row">
-            <div class="col m6 s12">
+            <div class="col m12 s12">
                 <h4>Social Media Links</h4>
-                <form class="col s12">
-                    <div class="row">
+                <form>
+                    <div class="col m6 s12">
                         <input type="hidden" id='_token_social' value="{{csrf_token()}}">
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <i class="fa fa-facebook prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="facebook_link" type="text" class="validate"
-                                   value="{{ (old('facebook')) ? old('facebook') : $data['facebook'] }}">
+                                   value="{{ (old('facebook')) ? old('facebook') : $data['facebook'] }}"
+                                   name="facebook">
                             <label for="facebook_link">Facebook Page URL</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <i class="fa fa-twitter prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="twitter_link" type="text" class="validate"
-                                   value="{{ (old('twitter')) ? old('twitter') : $data['twitter'] }}">
+                                   value="{{ (old('twitter')) ? old('twitter') : $data['twitter'] }}" name="twitter">
                             <label for="twitter_link">Twitter Profile URL</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <i class="fa fa-google-plus prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="gplus_link" type="text" class="validate"
-                                   value="{{ (old('gplus')) ? old('gplus') : $data['gplus'] }}">
+                                   value="{{ (old('gplus')) ? old('gplus') : $data['gplus'] }}" name="gplus">
                             <label for="gplus_link">Google Plus Page URL</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <i class="fa fa-instagram prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="instagram_link" type="text" class="validate"
-                                   value="{{ (old('instagram')) ? old('instagram') : $data['instagram'] }}">
+                                   value="{{ (old('instagram')) ? old('instagram') : $data['instagram'] }}"
+                                   name="instagram">
                             <label for="instagram_link">Instagram Profile URL</label>
                         </div>
-                        <div class="input-field col s6">
+                    </div>
+                    <div class="col m6 s12">
+                        <div class="input-field col s12">
                             <i class="fa fa-youtube-play prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="youtube_link" type="text" class="validate"
-                                   value="{{ (old('youtube')) ? old('youtube') : $data['youtube'] }}">
+                                   value="{{ (old('youtube')) ? old('youtube') : $data['youtube'] }}" name="youtube">
                             <label for="youtube_link">Youtube Channel URL</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <i class="fa fa-linkedin prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="linkedin_link" type="text" class="validate"
-                                   value="{{ (old('linkedin')) ? old('linkedin') : $data['linkedin'] }}">
+                                   value="{{ (old('linkedin')) ? old('linkedin') : $data['linkedin'] }}"
+                                   name="linkedin">
                             <label for="linkedin_link">LinkedIn Page URL</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <i class="fa fa-vimeo prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="vimeo_link" type="text" class="validate"
-                                   value="{{ (old('vimeo')) ? old('vimeo') : $data['vimeo'] }}">
+                                   value="{{ (old('vimeo')) ? old('vimeo') : $data['vimeo'] }}" name="vimeo">
                             <label for="vimeo_link">Vimeo Profile URL</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s12">
                             <i class="fa fa-snapchat-ghost prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="snapchat_link" type="text" class="validate"
-                                   value="{{ (old('snapchat')) ? old('snapchat') : $data['snapchat'] }}">
+                                   value="{{ (old('snapchat')) ? old('snapchat') : $data['snapchat'] }}"
+                                   name="snapchat">
                             <label for="snapchat_link">Snapchat Username</label>
                         </div>
-                        <div class="col s12">
-                            <button class="btn btn-primary" id="ajaxUpdateSocialLinks">
-                                Update Social Media Links
-                            </button>
-                        </div>
+
+                    </div>
+                    <div class="col s12">
+                        <button class="btn btn-primary" id="ajaxUpdateSocialLinks">
+                            Update Social Media Links
+                        </button>
                     </div>
                 </form>
             </div>
-            <div class="col m6 s12">
+            <div class="col m12 s12">
                 <h4>Contact Details</h4>
-                <form class="col s12">
-                    <div class="row">
+                <form>
+                    <div class="col m6 s12">
                         <input type="hidden" id='_token_contact' value="{{csrf_token()}}">
                         <div class="input-field col s12">
                             <i class="fa fa-phone prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="phone_contact_detail" type="text" class="validate"
-                                   value="{{ (old('phone')) ? old('phone') : $data['phone'] }}">
+                                   value="{{ (old('phone')) ? old('phone') : $data['phone'] }}" name="phone">
                             <label for="phone_contact_detail">Phone Number</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="fa fa-envelope prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="email_contact_detail" type="text" class="validate"
-                                   value="{{ (old('email')) ? old('email') : $data['email'] }}">
+                                   value="{{ (old('email')) ? old('email') : $data['email'] }}" name="email">
                             <label for="email_contact_detail">Email Address</label>
                         </div>
+                    </div>
+                    <div class="col m6 s12">
                         <div class="input-field col s12">
                             <i class="fa fa-skype prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="skype_contact_detail" type="text" class="validate"
-                                   value="{{ (old('skype')) ? old('skype') : $data['skype'] }}">
+                                   value="{{ (old('skype')) ? old('skype') : $data['skype'] }}" name="skype">
                             <label for="skype_contact_detail">Skype Username</label>
                         </div>
                         <div class="input-field col s12">
                             <i class="fa fa-whatsapp prefix"></i>
+                            <a class="delete-link"><i class="fa fa-close fa-1x delete_icon"></i></a>
                             <input id="whatsapp_contact_detail" type="text" class="validate"
-                                   value="{{ (old('whatsapp')) ? old('whatsapp') : $data['whatsapp'] }}">
+                                   value="{{ (old('whatsapp')) ? old('whatsapp') : $data['whatsapp'] }}"
+                                   name="whatsapp">
                             <label for="whatsapp_contact_detail">Whatsapp Enabled Number</label>
+
                         </div>
 
-                        <div class="col s12">
-                            <button class="btn btn-primary" id="ajaxUpdateContactDetails">
-                                Update Contact Details
-                            </button>
-                        </div>
+
+                    </div>
+                    <div class="col s12">
+                        <button class="btn btn-primary" id="ajaxUpdateContactDetails">
+                            Update Contact Details
+                        </button>
                     </div>
                 </form>
             </div>
@@ -443,6 +467,7 @@
         var URL_MAP = '{{route('config.update_address_map')}}';
         var URL_MAP_STYLE = '{{route('config.update_address_map_style')}}';
         var URL_CONTACT = '{{route('config.update_contact_details')}}';
+        var URL_DELETE = '{{route('config.delete-config')}}';
 
         var lat, long, map;
         function initMap() {

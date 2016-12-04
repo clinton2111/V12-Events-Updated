@@ -146,4 +146,19 @@ class ConfigController extends Controller
 
     }
 
+    public function deleteConfig(Request $request)
+    {
+        $key = $request->name;
+//        dd($key);
+        if($this->checkIfKeyExists($key)){
+            $deleteState=Config::where('key', $key)->delete();
+            if($deleteState){
+                return response()->json(['message' => ucwords($key).' Deleted Successfully', 'status' => 200], 200);
+            }else{
+                return response()->json(['message' => ucwords($key).' Could Not Be Deleted', 'status' => 200], 200);
+            }
+        }else{
+            return response()->json(['message' => 'Entry Does Not Exist', 'status' => 200], 200);
+        }
+    }
 }

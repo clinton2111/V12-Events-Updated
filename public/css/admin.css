@@ -9,3 +9,22 @@ header, main, footer {
     padding-left: 0;
   }
 }
+/* line 3, ../../resources/assets/sass/admin_components/_dashboard-contact.scss */
+.dashboard-contact form .input-field {
+  position: relative;
+}
+/* line 5, ../../resources/assets/sass/admin_components/_dashboard-contact.scss */
+.dashboard-contact form .input-field .delete-link {
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+}
+/* line 9, ../../resources/assets/sass/admin_components/_dashboard-contact.scss */
+.dashboard-contact form .input-field .delete-link .delete_icon {
+  color: black;
+  float: right;
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  cursor: pointer;
+  pointer-events: all;
+}
